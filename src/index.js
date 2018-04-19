@@ -12,8 +12,11 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoic2FhZGlxbSIsImEiOiJjamJpMXcxa3AyMG9zMzNyNmdxN
 let steps = [
   [0.3, '#660066'],
   [0.6, '#493e75'],
-  [0.9, '#4488CC'],
-  [1.0, '#76d3f2']
+  [0.9, '#63a3e2'],
+  [0.92, '#76d3f2'],
+  [0.96, '#88dffc'],
+  [0.98, '#a8e9ff'],
+  [1.0, '#baeafc']
 ]
 
 class Application extends React.Component {
@@ -27,7 +30,13 @@ class Application extends React.Component {
       zoom: 12.5,
       buses:bus_list,
       selected_bus: 468,
+      height:props.height,
+      width: props.width
     };
+  }
+
+  componentWillMount(){
+    this.setState({height: window.innerHeight,width:window.innerWidth});
   }
 
   componentDidMount() {
@@ -98,6 +107,12 @@ class Application extends React.Component {
   handle_bus(e){
     e.preventDefault();
     let selection = e.target.value;
+    let pad = {}
+    if (this.state.width<500){
+      pad ={top:this.state.height*0.3, bottom: 5, left:5, right:5};
+    } else {
+      pad ={top:this.state.height*0.1, bottom:this.state.height*0.1, left:this.state.width*0.3, right:this.state.height*0.1};
+    }
 
     this.setState({selected_bus: selection}, () => {
       let bus = 'https://e9tfys5j6f.execute-api.us-west-2.amazonaws.com/busroutes/api/bus/'+this.state.selected_bus
@@ -109,7 +124,7 @@ class Application extends React.Component {
         }).then(data => {
             let bounds= bbox(data); //find bounding box using Turf
             this.map.fitBounds(bounds, {
-              padding: {top: 120, bottom:120, left: 430, right: 130}
+              padding: {top: pad.top, bottom:pad.bottom, left: pad.left, right: pad.right}
             });
         });
 
@@ -130,7 +145,7 @@ class Application extends React.Component {
         <div className="border_box">
 
           <h1>Calgary Transit Bus Routes</h1>
-          <h2>Closeness Centrality (Beta)</h2>
+          <h2>Closeness Centrality Index </h2><h4>(Beta)</h4>
 
           <select onChange={this.handle_bus} value={this.state.value} className="select_option">
             {optionItems}
@@ -143,7 +158,9 @@ class Application extends React.Component {
               <p className="alignright">Low Closeness</p>
             </div>
             <div style={{clear: "both"}}></div>
-            <p style={{marginTop:"20px"}}><strong>Closeness Centratliy</strong> measures the closeness of a street to other streets. The higher the closeness centraltiy the more central the street.</p>
+            <p className="description"><strong>Closeness Centratliy</strong> measures the closeness of a street to other streets. The higher the closeness centraltiy the more central the street.</p>
+
+            <h4><a href="https://www.nodalscapes.com">www.nodalscapes.com</a></h4>
         </div>
 
       </div>
