@@ -151,16 +151,16 @@ class Application extends React.Component {
             {optionItems}
           </select>
 
-          <img src={gradient} alt="gradient" style={{marginTop:"20px"}} />
+          <img src={gradient} alt="gradient" className="gradient" />
 
             <div id="textbox">
               <p className="alignleft">High Closeness</p>
               <p className="alignright">Low Closeness</p>
             </div>
             <div style={{clear: "both"}}></div>
-            <p className="description"><strong>Closeness Centratliy</strong> measures the closeness of a street to other streets. The higher the closeness centraltiy the more central the street.</p>
+            <p className="description"><strong>Closeness Centrality</strong> measures the closeness of a street to other streets. The higher the closeness centrality the more central the street.</p>
 
-            <h4><a href="https://www.nodalscapes.com">www.nodalscapes.com</a></h4>
+            <h4><a href="https://www.nodalscapes.com">www.nodalscapes.wordpress.com</a></h4>
         </div>
 
       </div>

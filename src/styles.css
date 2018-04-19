@@ -1,8 +1,8 @@
-html {
-	font-family: sans-serif;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust:     100%;
-}
+
+* {
+	margin: 0;
+	padding: 0;
+	}
 
 body {
 	margin: 0px;
@@ -29,7 +29,7 @@ body {
 	background: #6d6d6d;
 	font-style:bold;
 	outline:none;
-	margin-top:20px
+	margin-top:10px
 }
 
 .border_box{
@@ -38,7 +38,7 @@ body {
 	display: inline-block;
 	position: absolute;
 	margin:0px;
-	padding:15px;
+	padding:5px;
 	color: #000;
 }
 
@@ -71,6 +71,9 @@ p{
 	display:none;
 }
 
+.gradient{
+	margin-top:10px;
+}
 
 
 @media screen and ( min-width: 500px ) {
@@ -89,6 +92,14 @@ p{
 	.description{
 		margin-top: 20px;
 		display: block;
+	}
+
+	.select_option{
+		margin-top:15px
+	}
+
+	.gradient{
+		margin-top:15px;
 	}
 
 }
